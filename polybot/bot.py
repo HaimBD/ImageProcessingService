@@ -91,6 +91,10 @@ class ImageProcessingBot(Bot):
                 caption = msg["caption"]
                 if "rotate" in caption.lower():
                     self.process_image_rotate(msg)
+                if "contour in" in caption.lower():
+                    self.process_image_contur(msg)
+                if "blur" in caption.lower():
+                    self.process_image_blur(msg)
             else:
                 logger.info("Received photo without a caption.")
         elif "text" in msg:
