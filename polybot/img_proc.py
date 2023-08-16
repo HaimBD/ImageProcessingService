@@ -56,8 +56,46 @@ class Img:
         raise NotImplementedError()
 
     def concat(self, other_img, direction='horizontal'):
-        # TODO remove the `raise` below, and write your implementation
-        raise NotImplementedError()
+        if not isinstance(other_img, Img):
+            raise TypeError("The 'other_img' parameter must be an instance of the Img Class.")
+
+        if direction not in ['horizontal', 'vertical']:
+            raise ValueError("Invalid 'direction' parameter. It should be either 'horizontal' or 'vertical'.")
+
+        if direction == 'horizontal':
+            if len(self.data) != len(other_img.data):
+                # Resize images to have the same height
+                min_height = min(len(self.data), len(other_img.data))
+                self.data = self.data[:min_height]
+                other_img.data = other_img.data[:min_height]
+
+            combined_data = []
+            for row_self, row_other in zip(self.data, other_img.data):
+                if len(row_self) != len(row_other):
+                    raise RuntimeError("Both images must have the same width when concatenating horizontally.")
+                combined_row = row_self + row_other
+                combined_data.append(combined_row)
+
+            # Store the concatenated data in the instance attribute
+            self.data = combined_data
+
+        elif direction == 'vertical':
+            if len(self.data[0]) != len(other_img.data[0]):
+                # Resize images to have the same width
+                min_width = min(len(self.data[0]), len(other_img.data[0]))
+                for i in range(len(self.data)):
+                    self.data[i] = self.data[i][:min_width]
+                for i in range(len(other_img.data)):
+                    other_img.data[i] = other_img.data[i][:min_width]
+
+            if len(self.data[0]) != len(other_img.data[0]):
+                raise RuntimeError("Both images must have the same width when concatenating vertically.")
+
+            # Combine rows of both images
+            combined_data = self.data + other_img.data
+
+            # Store the concatenated data in the instance attribute
+            self.data = combined_data
 
     def segment(self):
         # TODO remove the `raise` below, and write your implementation
