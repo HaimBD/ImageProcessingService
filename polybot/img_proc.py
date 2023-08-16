@@ -47,13 +47,18 @@ class Img:
         for i, row in enumerate(self.data):
             res = []
             for j in range(1, len(row)):
-                res.append(abs(row[j - 1] - row[j]))
+                res.append(abs(row[j-1] - row[j]))
 
             self.data[i] = res
 
-    def salt_n_pepper(self):
-        # TODO remove the `raise` below, and write your implementation
-        raise NotImplementedError()
+    def rotate(self):
+        rotated_data = []
+        for j in range(len(self.data[0])):
+            rotated_row = []
+            for i in range(len(self.data)):
+                rotated_row.append(self.data[i][j])
+            rotated_data.append(rotated_row)
+        self.data = rotated_data
 
     def concat(self, other_img, direction='horizontal'):
         if not isinstance(other_img, Img):
@@ -96,20 +101,3 @@ class Img:
 
             # Store the concatenated data in the instance attribute
             self.data = combined_data
-
-    def segment(self):
-        # TODO remove the `raise` below, and write your implementation
-        raise NotImplementedError()
-
-
-
-    def rotate(self):
-        rotated_data = []
-        for j in range(len(self.data[0])):
-            rotated_row = []
-            for i in range(len(self.data)):
-                rotated_row.append(self.data[i][j])
-            rotated_data.append(rotated_row)
-        self.data = rotated_data
-
-# Trying to run the action workflow#2
