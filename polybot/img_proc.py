@@ -43,6 +43,26 @@ class Img:
 
         self.data = result
 
+    def contour(self):
+        for i, row in enumerate(self.data):
+            res = []
+            for j in range(1, len(row)):
+                res.append(abs(row[j - 1] - row[j]))
+
+            self.data[i] = res
+
+    def salt_n_pepper(self):
+        # TODO remove the `raise` below, and write your implementation
+        raise NotImplementedError()
+
+    def concat(self, other_img, direction='horizontal'):
+        # TODO remove the `raise` below, and write your implementation
+        raise NotImplementedError()
+
+    def segment(self):
+        # TODO remove the `raise` below, and write your implementation
+        raise NotImplementedError()
+
 
 
     def rotate(self):
