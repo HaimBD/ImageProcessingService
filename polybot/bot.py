@@ -92,7 +92,7 @@ class ImageProcessingBot(Bot):
                 if "concat" in caption.lower():
                     self.process_image(msg)
                 if "contour" in caption.lower():
-                    self.process_image_contur(msg)
+                    self.process_image_contour(msg)
                 if "rotate" in caption.lower():
                     self.process_image_rotate(msg)
             else:
@@ -121,7 +121,7 @@ class ImageProcessingBot(Bot):
             self.send_photo(msg['chat']['id'], processed_image_path)
 
         self.processing_completed = True
-    def process_image_contur(self, msg):
+    def process_image_contour(self, msg):
         self.processing_completed = False
 
         # Download the two photos sent by the user
